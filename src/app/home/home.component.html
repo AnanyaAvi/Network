@@ -1,0 +1,253 @@
+
+<!-- Ask a question begins here -->
+<div class="hf-writeHereBox" id="writeHereBox" (click)="OpenTextEditor()">
+  <p>Ask a Question</p>
+  <div class="hf-cheveron" id="cheveronUP">
+      <i class='bx bx-chevron-up' id="arrowUp"></i>
+      <i class='bx bx-chevron-down' id="arrowDown"></i>
+  </div>
+</div>
+<div class="hf-editContainer" id="textEditor">
+  <div id="text-input" contenteditable="true" (keyup)="CountChars()"></div>
+  <div class="options">
+      <div class="d-flex" style="flex-wrap: wrap;">
+              <!-- Text Format -->
+      <button id="bold" class="option-button format" (click)="optionButton('bold')" (click)="ActivateMe('bold')">
+        <i class="fa-solid fa-bold"></i>
+    </button>
+  <button id="italic" class="option-button format" (click)="optionButton('italic')" (click)="ActivateMe('italic')">
+        <i class="fa-solid fa-italic"></i>
+    </button>
+  <button id="underline" class="option-button format" (click)="optionButton('underline')" (click)="ActivateMe('underline')">
+        <i class="fa-solid fa-underline"></i>
+    </button>
+  <button id="strikethrough" class="option-button format" (click)="optionButton('strikethrough')" (click)="ActivateMe('strikethrough')">
+        <i class="fa-solid fa-strikethrough"></i>
+    </button>
+  <button id="superscript" class="option-button script" (click)="optionButton('superscript')" (click)="ActivateMe('superscript')">
+        <i class="fa-solid fa-superscript"></i>
+    </button>
+  <button id="subscript" class="option-button script" (click)="optionButton('subscript')" (click)="ActivateMe('subscript')">
+        <i class="fa-solid fa-subscript"></i>
+    </button>
+
+  <!-- List -->
+  <button id="insertOrderedList" class="option-button" (click)="optionButton('insertOrderedList')">
+        <div class="fa-solid fa-list-ol"></div>
+    </button>
+  <button id="insertUnorderedList" class="option-button" (click)="optionButton('insertUnorderedList')">
+        <i class="fa-solid fa-list"></i>
+    </button>
+
+  <!-- Undo/Redo -->
+  <button id="undo" class="option-button" (click)="optionButton('undo')">
+        <i class="fa-solid fa-rotate-left"></i>
+    </button>
+  <button id="redo" class="option-button" (click)="optionButton('redo')">
+        <i class="fa-solid fa-rotate-right"></i>
+    </button>
+
+  <!-- Link -->
+  <button id="createLink" class="adv-option-button" (click)="advancedOptionButton('createLink')">
+        <i class="fa fa-link"></i>
+    </button>
+  <button id="unlink" class="option-button" (click)="advancedOptionButton('unlink')">
+        <i class="fa fa-unlink"></i>
+    </button>
+
+  <!-- Alignment -->
+  <button id="justifyLeft" class="option-button align" (click)="JustifyLeft()">
+        <i class="fa-solid fa-align-left"></i>
+    </button>
+  <button id="justifyCenter" class="option-button align" (click)="JustifyCenter()">
+        <i class="fa-solid fa-align-center"></i>
+    </button>
+  <button id="justifyRight" class="option-button align" (click)="JustifyRight()">
+        <i class="fa-solid fa-align-right"></i>
+    </button>
+  <button id="justifyFull" class="option-button align" (click)="JustifyFull()">
+        <i class="fa-solid fa-align-justify"></i>
+    </button>
+    
+    
+  <select id="fontSize" class="adv-option-button" name="fontSize" (click)="FontSizeChange()">
+        <option value="">A</option>
+        <option value="7">H1</option>
+        <option value="6">H2</option>
+        <option value="5">H3</option>
+        <option value="4">H4</option>
+        <option value="3">H5</option>
+        <option value="2">H6</option>
+        <option value="1">H7</option>
+    </select>
+
+  <!-- Color -->
+  <div class="input-wrapper">
+      <input type="color" id="foreColor" class="adv-option-button" (click)="ForeColorOptionButton('foreColor')" />
+      <i class='bx bx-font-color'></i>
+  </div>
+  <div class="input-wrapper">
+      <input type="color" id="backColor" class="adv-option-button" (click)="BackColorOptionButton('backColor')" />
+      <label for="backColor"><i class='bx bx-highlight' undefined ></i></label>
+  </div>
+      </div>
+      <!-- <div class="charsLeft" id="charsLeft">
+          {{CharsLeft}}:{{HtmlLength}}
+      </div> -->
+      
+      <button id="justifyFull" class="option-button align" style="font-size: 28px;" (click)="SendQuestion()">
+          <i class='bx bxs-send'></i>
+      </button>
+  </div>
+</div>
+<!-- Ask a question begins here -->
+
+
+
+<!-- Ask a question section begins here -->
+<!-- <button class="my-accord">Ask Question
+  <fa-icon [icon]="faAngleDown"></fa-icon>
+</button>
+<div class="acc-panel">
+  
+  
+  <textarea id="textarea1" name="" rows="5" cols="" placeholder="Write here"></textarea>
+  
+  <div class="panel-icons d-flex justify-content-between">
+    <div class="panel-icon-left">
+      <fa-icon id="bold" class="panel-icon format" [icon]="faBold"></fa-icon> 
+      <fa-icon id="italic" class="panel-icon format" [icon]="faItalic"></fa-icon>
+      <fa-icon id="underline" class="panel-icon format" [icon]="faUnderline"></fa-icon>
+
+      <fa-icon class="panel-icon" id="justifyLeft" [icon]="faAlignLeft"></fa-icon>
+      <fa-icon class="panel-icon" id="justifyCenter" [icon]="faAlignCenter"></fa-icon>
+      <fa-icon class="panel-icon" id="justifyRight" [icon]="faAlignRight"></fa-icon>
+
+      <fa-icon class="panel-icon" [icon]="faSuperscript"></fa-icon>
+      <fa-icon class="panel-icon" [icon]="faSubscript"></fa-icon>
+
+      <fa-icon class="panel-icon" [icon]="faListOl"></fa-icon>
+      <fa-icon class="panel-icon" [icon]="faListUl"></fa-icon>
+
+      <fa-icon class="panel-icon" [icon]="faArrowRightRotate"></fa-icon>
+      <fa-icon class="panel-icon" [icon]="faArrowLeftRotate"></fa-icon>
+
+    </div>
+    <div class="panel-icon-right">
+      <fa-icon class="panel-icon" [icon]="faPaperPlane"></fa-icon>
+    </div>
+  </div>
+</div> -->
+<!-- Ask a question section ends here -->
+
+<!-- post 1 starts here -->
+<div class="post">
+  <div class="post-header card-title">
+    <div class="user-info d-flex">
+      <div class="left d-flex">
+        <a href=""><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" /></a>
+        <div class="user-name d-flex">
+          <p class="name">Ananya Avi</p>
+          <p class="time">Time & Date</p>
+        </div>
+      </div>
+      <div class="right">
+        <div class="rank">
+          <p>#12 in weekly ranking</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-body m-3">
+    <p class="question fw-bold m-2"> How to improve productivity of employees? </p>
+    <p class="answer m-2"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+    <div class="d-flex justify-content-between">
+      <div><a class="m-2" href="">view full post</a></div>
+      <div><button class="answerBtn">Answer this</button></div>
+    </div>
+  </div>
+
+  <div class="post-footer1">
+    <div class="footer-icon d-flex justify-content-between">
+      <div class="left-footer-icon d-flex">
+        <div class="d-flex"><fa-icon [icon]="faThumbsUp"></fa-icon> <p class="like-count fw-bold">24</p></div>
+        <div><fa-icon [icon]="faThumbsDown"></fa-icon></div>
+        <div><fa-icon [icon]="faComment"></fa-icon></div>
+      </div>
+      <div class="right-footer-icon">
+        <fa-icon [icon]="faBookmark"></fa-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-footer2 d-flex justify-content-between">
+    <div class="replies">38 people replied to this post</div>
+    <div class="hashtags d-flex">
+      <p>#productivity</p>
+      <p>#learningContent</p>
+      <p>#employee</p>
+      <p>#workEthics</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- post 1 ends here -->
+
+<!-- post 2 starts here -->
+<div class="post">
+  <div class="post-header card-title">
+    <div class="user-info d-flex">
+      <div class="left d-flex">
+        <a href=""><img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" /></a>
+        <div class="user-name d-flex">
+          <p class="name">Ananya Avi</p>
+          <p class="time">Time & Date</p>
+        </div>
+      </div>
+      <div class="right">
+        <div class="rank">
+          <p>#12 in weekly ranking</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-body m-3">
+    <p class="question fw-bold m-2"> How to improve productivity of employees? </p>
+    <p class="answer m-2"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+    <img class="img-fluid post-img" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" />
+    <div class="d-flex justify-content-between">
+      <div><a class="m-2" href="">view full post</a></div>
+      <div><button class="answerBtn">Answer this</button></div>
+    </div>
+  </div>
+
+  <div class="post-footer1">
+    <div class="footer-icon d-flex justify-content-between">
+      <div class="left-footer-icon d-flex">
+        <div class="d-flex"><fa-icon [icon]="faThumbsUp"></fa-icon> <p class="like-count fw-bold">24</p></div>
+        <div><fa-icon [icon]="faThumbsDown"></fa-icon></div>
+        <div><fa-icon [icon]="faComment"></fa-icon></div>
+      </div>
+      <div class="right-footer-icon">
+        <fa-icon [icon]="faBookmark"></fa-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-footer2 d-flex justify-content-between">
+    <div class="replies">38 people replied to this post</div>
+    <div class="hashtags d-flex">
+      <p>#productivity</p>
+      <p>#learningContent</p>
+      <p>#employee</p>
+      <p>#workEthics</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- post 2 ends here -->
+
